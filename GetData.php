@@ -3,8 +3,8 @@ $keyword='';
 $resultData='';
 
 //データ受け取り
-if(isset($_POST['word'])){
-    $keyword=$_POST['word'];	//キーワード
+if(isset($_POST["GameID"])){
+    $keyword=$_POST["GameID"];	//キーワード
 }else{
     $keyword = "not word";
 }
