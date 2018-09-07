@@ -1,18 +1,24 @@
 <?php
 $keyword='';
 $resultData='';
-
+$data = array();
 //データ受け取り
 if(isset($_POST["GameID"])){
-    $keyword=$_POST["GameID"];	//キーワード
+    $data["GameID"] = $_POST["GameID"];
+    $data["Time"] = $_POST["Time"];
+    $data["DataID"] = $_POST["DataID"];
+    $data["DataName"] = $_POST["DataName"];
+    $data["Score"] = $_POST["Score"];
+    
 }else{
-    $keyword = "not word";
+    $data = "not word";
 }
 
-
-
-$resultData = $keyword;
+// $resultData = $keyword;
 
 header('Content-type: application/plain');
 // print json_encode($resultData);
-print $resultData;
+// print $data;
+print json_encode( $data ) ;
+
+
