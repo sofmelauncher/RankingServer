@@ -16,19 +16,7 @@ try {
 } catch (PDOException $e) {
     exit('データベース接続失敗。'.$e->getMessage());
 }
-print("終了");
 
-
-// header('Content-type: application/plain');
-// print json_encode($resultData);
-// print $data;
-// print json_encode( $statement ) ;
-
-// $members = array();
-// foreach ($statement as $row) {
-//     $members[] = $row;
-// }
-// var_dump($members);
 $userData = array();
 while($row = $statement->fetch(PDO::FETCH_ASSOC)){
     $userData[]=array(
@@ -38,4 +26,5 @@ while($row = $statement->fetch(PDO::FETCH_ASSOC)){
     "ScoreValue" => $row["ScoreValue"]
     );
 }
+header('Content-type: application/json');
 print json_encode($userData) ;
