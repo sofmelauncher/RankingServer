@@ -6,10 +6,11 @@ try {
     $pdo = new PDO($dns,$user,$pw,
     array(PDO::ATTR_EMULATE_PREPARES => false));
     print('connected<br>');
-    for ($i = 1; $i <= 10; $i++) {
-        $statement = $pdo->query($sql1.strval($i).$sql2);
-        print(strval($i)." is created<br>");
-    }
+    // for ($i = 1; $i <= 10; $i++) {
+    //     $statement = $pdo->query($sql1.strval($i).$sql2);
+    //     print(strval($i)." is created<br>");
+    // }
+    $statement = $pdo->query($sql1.strval(55).$sql2);
 } catch (PDOException $e) {
     exit('データベース接続失敗。'.$e->getMessage());
 }

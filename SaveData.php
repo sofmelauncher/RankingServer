@@ -10,18 +10,19 @@ if(isset($_POST["GameID"])){
 }else{
     $id = 0;
 }
-$sql1 = "INSERT INTO GameID";
-$sql2 = " (SaveTime, DataName, ScoreValue) VALUES (";
+
+$sql1 = "INSERT INTO `gameid";
+$sql2 = "` (`DataID`, `SaveTime`, `DataName`, `ScoreValue`) VALUES (";
 
 try {
     $pdo = new PDO($dns, $user, $pw, array(PDO::ATTR_EMULATE_PREPARES => false));
-    $sql3 = $sql1.strval($id).$sql2.$time." ".$name." ".$value;
-    $statement = $pdo->query($sql3);
-    print "1";
+    $sql3 = $sql1.strval($id).$sql2."NULL, '".strval($time)."', N'".strval($name)."', '".strval($value)."');";
+    $str = mb_convert_encoding($sql3, "UTF-8", "auto");
+    $statement = $pdo->query($str);
 } catch (PDOException $e) {
-    exit('データベース接続失敗。'.$e->getMessage());
+    exit("データベース接続失敗。".$e->getMessage());
     print "-1";
 }
 
-header('Content-type: application/plain');
-print json_encode($sql3);
+// header('Content-type: application/plain');
+print $str;
