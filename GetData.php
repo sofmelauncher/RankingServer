@@ -15,7 +15,6 @@ try {
     $pdo = new PDO($dns, $user, $pw, array(PDO::ATTR_EMULATE_PREPARES => false));
     $statement = $pdo->query($sql1.strval($id).$sql2).strval($order).";";
 } catch (PDOException $e) {
-    echo("aaa");
     exit('データベース接続失敗。'.$e->getMessage());
 }
 

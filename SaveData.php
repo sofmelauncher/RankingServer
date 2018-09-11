@@ -20,8 +20,8 @@ try {
     $str = mb_convert_encoding($sql3, "UTF-8", "auto");
     $statement = $pdo->query($str);
 } catch (PDOException $e) {
+    $str = "-1";
     exit("データベース接続失敗。".$e->getMessage());
-    print "-1";
 }
 
 // header('Content-type: application/plain');
