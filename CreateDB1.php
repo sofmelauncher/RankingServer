@@ -10,7 +10,7 @@ try {
     //     $statement = $pdo->query($sql1.strval($i).$sql2);
     //     print(strval($i)." is created<br>");
     // }
-    $statement = $pdo->query($sql1.strval(55).$sql2);
+    $statement = $pdo->query($sql1.strval(1).$sql2);
 } catch (PDOException $e) {
     exit('データベース接続失敗。'.$e->getMessage());
 }
