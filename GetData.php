@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 require('config.php');
-
+require_once __DIR__ . './Log.class.php';
 
 if(isset($_POST["GameID"])){
     $id = $_POST["GameID"];
@@ -22,9 +22,11 @@ if($limit === "0"){
 
 try {
     $pdo = new PDO($dns, $user, $pw, array(PDO::ATTR_EMULATE_PREPARES => false));
+    Log::info("Execute[{$sql3}]", $id);
     $statement = $pdo->query($sql3);
 } catch (PDOException $e) {
-    var_dump($e); 
+    var_dump($e);
+    Log::error("データベース接続失敗 [{$e->getMessage()}]", $id);
     exit('データベース接続失敗。'.$e->getMessage());
 }
 
@@ -38,7 +40,9 @@ while($row = $statement->fetch(PDO::FETCH_ASSOC)){
     );
 }
 header('Content-type: application/json');
-print json_encode($userData);
+$json_data = json_encode($userData);
+Log::info("Return[{$json_data}]", $id);
+print $json_data;
 // header('Content-type: application/plain');
 // // var_dump($sql3);
 // var_dump($statement);
