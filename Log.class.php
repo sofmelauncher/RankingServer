@@ -2,10 +2,12 @@
 class Log{
   public static function info($text, $id){
     self::write($text, $id, "INFO");
+    self::writeHtml($text, $id, "INFO");
   }
  
   public static function error($text, $id){
     self::write($text, $id, "ERROR");
+    self::writeHtml($text, $id, "ERROR");
   }
  
   private static function write($text, $id, $log_type){
@@ -20,7 +22,9 @@ class Log{
     $datetime = self::getDateTime();
     $date = self::getDate();
     $file_name = __DIR__ . "./log-{$date}.html";
-    $text = "{$datetime} [{$log_type}] [{$id}] {$text}" . PHP_EOL;
+    $text = str_replace("[","[<span style=\"color:#9c27b0;\">", $text);
+    $text = str_replace("]","</span>]", $text);
+    $text = "<p class = \"{$log_type}\" style = \"white-space:nowrap;margin:0em 0em 0em 0;font-size:18px;font-family:'Tahoma';\"> {$datetime} [{$log_type}] [{$id}] {$text}</p>" . PHP_EOL;
     return error_log(print_r($text, TRUE), 3, $file_name);
   }
  
